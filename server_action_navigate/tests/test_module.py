@@ -6,13 +6,14 @@ from odoo.tests.common import TransactionCase
 from odoo.tools.safe_eval import safe_eval
 
 
-class TestModule(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.action_server = self.env.ref(
+class TestModule(TransactionCase): 
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.action_server = cls.env.ref(
             "server_action_navigate.navigate_partner_2_tags"
         )
-        self.users = self.env["res.users"].search([])
+        cls.users = cls.env["res.users"].search([])
 
     def test_action_result(self):
         result = self.action_server.with_context(
